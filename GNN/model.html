@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Model &mdash; gnn 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Software" href="software.html" />
+    <link rel="prev" title="Graph Neural Network" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #e15e26" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> gnn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Graph Neural Network</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-gnn-model">The GNN model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="software.html">Software</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install (or Download) and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gnn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Graph Neural Network</a> &raquo;</li>
+        
+      <li>Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="model">
+<span id="id1"></span><h1>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Graphs are a rich structured data model exploitable to encode information from many different domains, which range from bioinformatics <a class="reference internal" href="../bibliography.html#barabasi" id="id2">[BNO04]</a> to neuroscience <a class="reference internal" href="../bibliography.html#sporns2003" id="id3">[Spo03]</a>, and social networks <a class="reference internal" href="../bibliography.html#newman-2010-ni-1809753" id="id4">[New10]</a>. Graphs allow the possibility to encode complex data as a set of parts, i.e. the graph <em>nodes</em>, and a set of relationships between these parts, i.e. the graph <em>edges</em>.  Indeed, nodes represent the basic entities that compose the atomic parts of the information, whereas an edge encodes a relationship that links a pair of entities. This model is quite natural in many applications and the encoding is often straightforward, keeping most of the original information in a compact data representation. As an example, the Web can be naturally seen and represented as a graph, with nodes corresponding to web pages (and storing their content), and edges standing for the hyper-links between them <a class="reference internal" href="../bibliography.html#belahcen2015" id="id5">[BBS15]</a>.</p>
+<p>Many classical machine learning approaches assume to deal with <em>flat</em> data, encoded as real valued vectors.
+Even if it is possible to obtain simpler representations from complex data structures, such as graphs, this process — typically with some sort of graph traversal — always implies a loss of information, an inaccurate modeling of the problem at hand or a higher complexity in the input data distribution.</p>
+</div>
+<div class="section" id="the-gnn-model">
+<h2>The GNN model<a class="headerlink" href="#the-gnn-model" title="Permalink to this headline">¶</a></h2>
+<p>Graph Neural Networks (GNNs) <a class="reference internal" href="../bibliography.html#scarselli2009thegn" id="id6">[SGT+09b]</a> are able to process input data encoded as general undirected/directed labeled graphs. GNNs are provided with a supervised learning algorithm that, beside the classical input-output data fitting measure, incorporates a criterion aimed at the development of a contractive dynamics, in order to properly process the cycles in the input graph.</p>
+<p>A GNN processes a graph in input and it can be naturally employed to compute an output for each node in the graph (<em>node–focused</em> computation). The training examples are provided as graphs for which supervisions are given as output target values for a subset of their nodes. This processing scheme can be adapted to perform a <em>graph–based</em> computation in which only one output is computed for the whole graph.</p>
+<p>A graph <span class="math notranslate nohighlight">\(G\)</span> is defined as a pair <span class="math notranslate nohighlight">\(G=(V,E)\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> represents the finite set of <em>nodes</em> and <span class="math notranslate nohighlight">\(E \subseteq V \times V\)</span> denotes the set of <em>edges</em>.
+An edge is identified by the unordered pair of nodes it connects, i.e. <span class="math notranslate nohighlight">\(e = (a,b)\)</span>, <span class="math notranslate nohighlight">\(e \in E\)</span> and <span class="math notranslate nohighlight">\(a,b \in V\)</span>. In the case in which an asymmetric relationship must be encoded, the pair of nodes that defines an edge must be considered as ordered, so as <span class="math notranslate nohighlight">\((a,b)\)</span> and <span class="math notranslate nohighlight">\((b,a)\)</span> represent different connections. In this case, it is preferable to use the term <em>arc</em>, while the corresponding graph will be referred as <em>directed</em>.</p>
+<p>The GNN model has been devised to deal with either directed or undirected graphs.
+Both edges and nodes can be enriched by attributes that are collected into a <em>label</em>. In the following we will assume that labels are vectors of predefined dimensionality (eventually different for nodes and edges) that encode features describing each individual node (f.i. average color, area, shape factors for nodes representing homogeneous regions in an image) and each edge (f.i. the distance between the barycenters of two adjacent regions and the length of the common boundary), respectively.</p>
+<p>The computation is driven by the input graph topology, which guides the network unfolding.</p>
+<p>We can attach a state <span class="math notranslate nohighlight">\(x_n \in \mathbf{R} ^s \)</span> to each node <span class="math notranslate nohighlight">\(n\)</span>, based on the information  contained in the neighborhood of the node.
+Moreover, each node and arch can be characterized by a label, respectively <span class="math notranslate nohighlight">\(l_n \in \mathbf{R} ^q \)</span> and <span class="math notranslate nohighlight">\(l_{(n,v)}  \in \mathbf{R}^p \)</span> are the labels attached to the node <span class="math notranslate nohighlight">\(n\)</span> and the arc connecting <span class="math notranslate nohighlight">\((n,v)\)</span>.
+The computational scheme is based on a diffusion mechanism, by which the GNN updates the state vector at each node as a function of the node label, and of the informative contribution of its neighborhood (edge labels and states of the neighboring nodes), as defined by the input graph topology. The state is supposed to summarize the information relevant to the task to be learnt for each node and, given the diffusion process, it will finally take into account the whole information encoded in the input graph. Afterwards, the state is used to compute the node output.</p>
+<p>Let <span class="math notranslate nohighlight">\(f_w\)</span> be a  parametric function, called <em>local transition function</em>, that drives the diffusion process and models the dependence of <span class="math notranslate nohighlight">\(x_n\)</span> with respect to the context of node <span class="math notranslate nohighlight">\(n\)</span>.
+Let <span class="math notranslate nohighlight">\(g_w\)</span> be the <em>local output function</em>, which describes how the output for each node is produced.</p>
+<p>Hence, the state and output computation are defined as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_n=f_w(l_n,l_{co[n]},x_{ne[n]},l_{ne[n]}) \\
+o_n=g_w(x_n,l_n)\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(l_n,l_{co[n]},x_{ne[n]},l_{ne[n]}\)</span> are respectively the label of <span class="math notranslate nohighlight">\(n\)</span>, the labels of the connected edges, the states and the labels of the nodes in the neighborhood of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/statef.gif"><img alt="../_images/statef.gif" class="align-center" src="../_images/statef.gif" style="width: 50%;" /></a>
+</div></blockquote>
+<p>A drawback of this formulation is that the transition function has a variable number of arguments depending on the neighborhood size.
+Moreover, when the set of neighbors is not ordered, the function <span class="math notranslate nohighlight">\(f_w\)</span> should be invariant with respect to a permutation of the nodes in the neighborhood.</p>
+<p>A simple solution is to reformulate the state evaluation function as</p>
+<div class="math notranslate nohighlight" id="equation-equaz">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equaz" title="Permalink to this equation">¶</a></span>\[x_n=\sum_{ u \in { ne_{ [n] } } }h_w(l_n,l_{(n,u)},x_u,l_u)\]</div>
+<p>given the label of the arc between the nodes <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(u\)</span>, i.e. <span class="math notranslate nohighlight">\(l_{(n,u)}\)</span>, and the label of the current node <span class="math notranslate nohighlight">\(l_n\)</span>.</p>
+<p>The summation in the reformulated equation <a class="reference internal" href="#equation-equaz">(1)</a> allows us to deal with any number of neighbors without the need of specifying a particular order for the set of the neighbors.</p>
+<p>The application of equation <a class="reference internal" href="#equation-equaz">(1)</a> for all the nodes in the graph defines a system of non–linear equations in the unknowns <span class="math notranslate nohighlight">\(x_n, n \in V\)</span>. The solution can be computed by the Jacobi iterative procedure as</p>
+<div class="math notranslate nohighlight" id="equation-unfolding">
+<span class="eqno">(2)<a class="headerlink" href="#equation-unfolding" title="Permalink to this equation">¶</a></span>\[x_n(t+1)=\sum_{(n,v)\in E} f_w(l_n,l_{(n,v)},x_{v}(t),l_{v})\]</div>
+<p>that implements the diffusion process for the state computation. If the state transition function <span class="math notranslate nohighlight">\(f_w\)</span> is a contraction mapping, the Banach Theorem guarantees that the iterative procedure converges to a unique solution <a class="reference internal" href="../bibliography.html#scarselli2009thegn" id="id7">[SGT+09b]</a>, that is the <em>fixed point</em> of equation <a class="reference internal" href="#equation-unfolding">(2)</a>. In practice, the required iterations can be limited to a maximum number.</p>
+<p>Both <span class="math notranslate nohighlight">\(f_w\)</span> and <span class="math notranslate nohighlight">\(g_w\)</span> can be implemented by simple multilayer perceptrons (MLPs), with a unique hidden layer. The computation of Eq. <a class="reference internal" href="#equation-unfolding">(2)</a>, represents the unfolding of the so called <em>encoding network</em>, where <span class="math notranslate nohighlight">\(f_w\)</span> and <span class="math notranslate nohighlight">\(g_w\)</span> are computed for each node.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/unfo.gif"><img alt="../_images/unfo.gif" class="align-center" src="../_images/unfo.gif" style="width: 70%;" /></a>
+</div></blockquote>
+<p>Basically, at each node in the graph, there is a replica of the MLP realizing <span class="math notranslate nohighlight">\(f_w\)</span>. Each unit stores the state at time <span class="math notranslate nohighlight">\(t\)</span>, i.e. <span class="math notranslate nohighlight">\(x_n(t)\)</span>. The set of states stored in all the nodes at time <span class="math notranslate nohighlight">\(t\)</span> are then used to compute the states at time <span class="math notranslate nohighlight">\(t+1\)</span>. The module <span class="math notranslate nohighlight">\(g_w\)</span> is also applied at each node for calculating the output, but only after the state computation has converged.</p>
+<p>See <a class="reference internal" href="../bibliography.html#scarselli2009thegn" id="id8">[SGT+09b]</a> and <a class="reference internal" href="../bibliography.html#dblp-series-isrl-bianchinim13" id="id9">[BM13]</a> for additional details.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="software.html" class="btn btn-neutral float-right" title="Software" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Graph Neural Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matteo Tiezzi
+      <span class="lastupdated">
+        Last updated on Aug 20, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

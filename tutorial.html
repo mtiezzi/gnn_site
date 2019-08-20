@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; gnn 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference/index.html" />
+    <link rel="prev" title="Install (or Download) and import" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #e15e26" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> gnn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GNN/index.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install (or Download) and import</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-usage-example">Simple usage example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simple-toy-example-for-input-formatting">Simple toy example for input formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-definition">Model definition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-data">Input data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arcnode">ArcNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nodegraph">NodeGraph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#en-input">EN Input</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#state-and-output-function-definition">State and output function definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training">Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluate">Evaluate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#predict">Predict</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gnn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simple-usage-example">
+<h2>Simple usage example<a class="headerlink" href="#simple-usage-example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gnn.GNN</span> <span class="k">as</span> <span class="nn">GNN</span>
+<span class="kn">import</span> <span class="nn">gnn.gnn_utils</span>
+<span class="kn">import</span> <span class="nn">Net</span> <span class="k">as</span> <span class="nn">n</span>
+
+<span class="c1"># Provide your own functions to generate input data</span>
+<span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">set_load</span><span class="p">()</span>
+
+<span class="c1"># Create the state transition function, output function, loss function and  metrics</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">Net</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+
+<span class="c1"># Create the graph neural network model</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">GNN</span><span class="o">.</span><span class="n">GNN</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+
+<span class="c1">#Training</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">Train</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">)</span>
+
+    <span class="c1"># Validate</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">Validate</span><span class="p">(</span><span class="n">inp_val</span><span class="p">,</span> <span class="n">arcnode_val</span><span class="p">,</span> <span class="n">labels_val</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">nodegraph_val</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-toy-example-for-input-formatting">
+<span id="simple"></span><h2>Simple toy example for input formatting<a class="headerlink" href="#simple-toy-example-for-input-formatting" title="Permalink to this headline">¶</a></h2>
+<p>Input composed by two graphs:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/g1.png"><img alt="_images/g1.png" src="_images/g1.png" style="width: 49%;" /></a>
+<a class="reference internal image-reference" href="_images/g2.png"><img alt="_images/g2.png" src="_images/g2.png" style="width: 49%;" /></a>
+</div></blockquote>
+<p>This graphs can be described in the <a class="reference internal" href="#enmatrices"><span class="std std-ref">EN Input</span></a> format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E</span></code> matrix describing the first graph ( <code class="docutils literal notranslate"><span class="pre">[[id_p,</span> <span class="pre">id_c,</span> <span class="pre">graph_id],...]</span></code>):</p>
+<a class="reference internal image-reference" href="_images/g1.png"><img alt="_images/g1.png" class="align-right" src="_images/g1.png" style="width: 45%;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">         [0 2 0]</span>
+<span class="go">         [0 4 0]</span>
+<span class="go">         [1 0 0]</span>
+<span class="go">         [1 2 0]</span>
+<span class="go">         [1 3 0]</span>
+<span class="go">         [2 0 0]</span>
+<span class="go">         [2 1 0]</span>
+<span class="go">         [2 3 0]</span>
+<span class="go">         [2 4 0]</span>
+<span class="go">         [3 1 0]</span>
+<span class="go">         [3 2 0]</span>
+<span class="go">         [4 0 0]</span>
+<span class="go">         [4 2 0]]</span>
+</pre></div>
+</div>
+<p>Note the last column, denoting the id (<code class="docutils literal notranslate"><span class="pre">0</span></code>) of the graph to which the arc belongs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E</span></code> matrix describing the second graph:</p>
+<a class="reference internal image-reference" href="_images/g2.png"><img alt="_images/g2.png" class="align-right" src="_images/g2.png" style="width: 45%;" /></a>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]</span>
+<span class="go">         [0 3 1]</span>
+<span class="go">         [1 2 1]</span>
+<span class="go">         [1 3 1]</span>
+<span class="go">         [2 3 1]</span>
+<span class="go">         [2 0 1]</span>
+<span class="go">         [3 0 1]</span>
+<span class="go">         [2 1 1]</span>
+<span class="go">         [3 1 1]</span>
+<span class="go">         [3 2 1]]</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<p>Note the last column, denoting the id (<code class="docutils literal notranslate"><span class="pre">1</span></code>) of the graph to which the arc belongs .</p>
+<p>The global <code class="docutils literal notranslate"><span class="pre">E_tot</span></code> matrix (with incremental node ids):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E_tot</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">             [0 2 0]</span>
+<span class="go">             [0 4 0]</span>
+<span class="go">             [1 0 0]</span>
+<span class="go">             [1 2 0]</span>
+<span class="go">             [1 3 0]</span>
+<span class="go">             [2 0 0]</span>
+<span class="go">             [2 1 0]</span>
+<span class="go">             [2 3 0]</span>
+<span class="go">             [2 4 0]</span>
+<span class="go">             [3 1 0]</span>
+<span class="go">             [3 2 0]</span>
+<span class="go">             [4 0 0]</span>
+<span class="go">             [4 2 0]</span>
+<span class="go">             [5 7 1]</span>
+<span class="go">             [5 8 1]</span>
+<span class="go">             [6 7 1]</span>
+<span class="go">             [6 8 1]</span>
+<span class="go">             [7 5 1]</span>
+<span class="go">             [7 6 1]</span>
+<span class="go">             [7 8 1]</span>
+<span class="go">             [8 5 1]</span>
+<span class="go">             [8 6 1]</span>
+<span class="go">             [8 7 1]]</span>
+</pre></div>
+</div>
+<p>The global <code class="docutils literal notranslate"><span class="pre">N</span></code> matrix ( in this simple case, each node has a different one-hot feature) (<code class="docutils literal notranslate"><span class="pre">[[node_features,</span> <span class="pre">graph_id],...</span> <span class="pre">]</span></code>) :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="go">         [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 1. 0. 0. 0. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 0. 0. 0. 1. 0. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]</span>
+<span class="go">         [0. 0. 0. 0. 0. 0. 0. 0. 1. 0.]]</span>
+</pre></div>
+</div>
+<p>The  <code class="docutils literal notranslate"><span class="pre">from_EN_to_GNN()</span></code> util takes care of formatting the inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">graphnode</span> <span class="o">=</span> <span class="n">gnn_utils</span><span class="o">.</span><span class="n">from_EN_to_GNN</span><span class="p">(</span><span class="n">E_tot</span><span class="p">,</span> <span class="n">N_tot</span><span class="p">)</span>
+
+<span class="c1"># random labels</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N_tot</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)[</span><span class="n">labels</span><span class="p">]</span>  <span class="c1"># one-hot encoding of labels</span>
+
+
+
+<span class="c1"># set input and output dim, the maximum number of iterations, the number of epochs and the optimizer</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">state_dim</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">input_dim</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">output_dim</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">max_it</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">num_epoch</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Create the state transition function, output function, loss function and  metrics</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">Net</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+
+<span class="c1"># Create the graph neural network model</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">GNN</span><span class="o">.</span><span class="n">GNN</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+
+<span class="c1">#Training</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_epoch</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">Train</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">)</span>
+
+    <span class="c1"># Validate</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">Validate</span><span class="p">(</span><span class="n">inp_val</span><span class="p">,</span> <span class="n">arcnode_val</span><span class="p">,</span> <span class="n">labels_val</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">nodegraph_val</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This guide is an introduction to the GNN package.</p>
+<p>The implementation consists of the two modules:</p>
+<ul class="simple">
+<li><p><strong>GNN.py</strong> contains the main core of the GNN</p></li>
+<li><p><strong>Net.py</strong> contains the implementation of several task oriented structures, such as <em>state</em> and <em>output</em> networks, loss functions and metrics definion.</p></li>
+</ul>
+<p>Users may implement their own version of the <strong>Net</strong> file, for a specific task.</p>
+</div>
+<div class="section" id="model-definition">
+<h2>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="input-data">
+<span id="inp-data"></span><h3>Input data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h3>
+<p>As described in <a class="reference internal" href="GNN/software.html#matrix-based"><span class="std std-ref">Matrix-based implementation</span></a>, the computations are based on the arcs in the input graphs.
+Hence, inputs to the model must be specified as an ordered edge list.</p>
+<p>In particular, for each edge, this structure (<code class="docutils literal notranslate"><span class="pre">inp</span></code>) must contain:</p>
+<ul class="simple">
+<li><p>the <strong>id</strong> of the child node (used to gather its state)</p></li>
+<li><p>the father and child <strong>node labels</strong></p></li>
+<li><p>the <strong>edge label</strong> (if available)</p></li>
+</ul>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/input.svg"><div align="center" class="align-center"><img alt="_images/input.svg" src="_images/input.svg" width="70%" /></div>
+</a>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We provide a novel utility to compose this kind of input, given a description of the graph dataset in an E-N format. See section  <a class="reference internal" href="#enmatrices"><span class="std std-ref">EN Input</span></a>.</p>
+</div>
+<div class="section" id="arcnode">
+<h4>ArcNode<a class="headerlink" href="#arcnode" title="Permalink to this headline">¶</a></h4>
+<p>In order to aggregate the state per node, a matrix multiplication with an edge–node matrix  is performed. The matrix encodes which arcs affect a certain node (see <a class="reference internal" href="GNN/software.html#matrix-based"><span class="std std-ref">Matrix-based implementation</span></a>).
+This matrix (<code class="docutils literal notranslate"><span class="pre">arcnode</span></code>) is sparse, to save memory.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/arcnode.svg"><div align="center" class="align-center"><img alt="_images/arcnode.svg" src="_images/arcnode.svg" width="50%" /></div>
+</a>
+</div></blockquote>
+</div>
+<div class="section" id="nodegraph">
+<h4>NodeGraph<a class="headerlink" href="#nodegraph" title="Permalink to this headline">¶</a></h4>
+<p>This matrix must be defined only in the case of Graph-based problems. See <a class="reference internal" href="GNN/software.html#graph-based"><span class="std std-ref">Graph–Based Output function</span></a> for more information.</p>
+<p>We provide a <code class="docutils literal notranslate"><span class="pre">Library</span></code> to generate these inputs for the simple benchmarks reported in our research papers <a class="reference internal" href="auto_examples/index.html#examples-gallery"><span class="std std-ref">Examples</span></a>.</p>
+</div>
+<div class="section" id="en-input">
+<span id="enmatrices"></span><h4>EN Input<a class="headerlink" href="#en-input" title="Permalink to this headline">¶</a></h4>
+<p>To simplify the input creation, we provide an utility in the <code class="docutils literal notranslate"><span class="pre">utils.py</span></code> file, the <code class="docutils literal notranslate"><span class="pre">from_EN_to_GNN(E,</span> <span class="pre">N)</span></code> function.</p>
+<p>The user can describe the dataset in the EN format:</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">E</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>numpy array of edges : [[id_p, id_c, graph_id],…]. One row for each arc in the dataset. First column must contain the ids of father nodes, the second column ids of child nodes. The third column contains an id that identifies the graph (to which the node belongs) in the dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">N</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>numpy array of nodes features - [[node_features, graph_id],… ]. One row for each and every node. A set of columns containing the nodes features. The last column is an id that identifies the graph (to which the node belongs) in the dataset.</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">from_EN_to_GNN</span></code> util takes this two array as input (<code class="docutils literal notranslate"><span class="pre">E</span></code> <code class="docutils literal notranslate"><span class="pre">N</span></code> ) and returns the formatted input for the GNN model, <code class="docutils literal notranslate"><span class="pre">inp</span></code>, <code class="docutils literal notranslate"><span class="pre">arcnode</span></code>, <code class="docutils literal notranslate"><span class="pre">graphnode</span></code>.</p>
+<p>See <a class="reference internal" href="#simple"><span class="std std-ref">Simple toy example for input formatting</span></a> for a practical example.</p>
+</div>
+</div>
+</div>
+<div class="section" id="state-and-output-function-definition">
+<h2>State and output function definition<a class="headerlink" href="#state-and-output-function-definition" title="Permalink to this headline">¶</a></h2>
+<p>The user must define an appropriate version of the <code class="docutils literal notranslate"><span class="pre">Net</span></code> file for the task to be solved.
+In particular, it is possible to define a custom version of the <em>state</em> and <em>output</em> network (MLPs with different architectures, number of layers etc.), loss function and  metrics.</p>
+<p>More details are available in the <a class="reference internal" href="auto_examples/index.html#examples-gallery"><span class="std std-ref">Examples</span></a> section.</p>
+<p>Following the notation used in the examples, we import this file into the code with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">Net_Subgraph</span> <span class="k">as</span> <span class="nn">n</span>
+</pre></div>
+</div>
+<p>Then it is possible to define the <code class="docutils literal notranslate"><span class="pre">net</span></code> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">Net</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">input_dim</span></code>, <code class="docutils literal notranslate"><span class="pre">state_dim</span></code>, <code class="docutils literal notranslate"><span class="pre">output_dim</span></code> represent the dimension of the inputs, the state net and the output net  respectively.</p>
+<p>Afterwards, the GNN model can be defined using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GNN</span><span class="o">.</span><span class="n">GNN</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this way, the model building is complete.</p>
+<p>This approach uses some default parameters that can be customized, specifying the complete set of  parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GNN</span><span class="o">.</span><span class="n">GNN</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span>  <span class="n">max_it</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span>
+<span class="go">        tensorboard)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="training">
+<h2>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Train</span></code> method runs one epoch of the training procedure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">loss</span><span class="p">,</span> <span class="n">it</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">Train</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It receives as inputs, <code class="docutils literal notranslate"><span class="pre">inp</span></code>, the input matrix described in <a class="reference internal" href="#inp-data"><span class="std std-ref">Input data</span></a>, the <code class="docutils literal notranslate"><span class="pre">arcnode</span></code> matrix, the node targets and the current epoch step.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case of a <em>graph-based</em> task, you can specify the NodeGraph matrix with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">g</span><span class="o">.</span><span class="n">Train</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>It returns the loss value <code class="docutils literal notranslate"><span class="pre">loss</span></code> and the number of iteration of the current step convergence procedure <code class="docutils literal notranslate"><span class="pre">it</span></code>.</p>
+</div>
+<div class="section" id="validation">
+<h2>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Validate</span></code> method performs the validation (i.e., using the validation set) of the model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loss_val</span><span class="p">,</span> <span class="n">metr</span><span class="p">,</span> <span class="n">it</span> <span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">Validate</span><span class="p">(</span><span class="n">inp_val</span><span class="p">,</span> <span class="n">arcnode_val</span><span class="p">,</span> <span class="n">labels_val</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It outputs, regarding the set given as input, the loss value <code class="docutils literal notranslate"><span class="pre">loss</span></code>, the accuracy (custom defined in the Net file) <code class="docutils literal notranslate"><span class="pre">metr</span></code>, the number of iteration in the convergence procedure <code class="docutils literal notranslate"><span class="pre">it</span></code>.</p>
+</div>
+<div class="section" id="evaluate">
+<h2>Evaluate<a class="headerlink" href="#evaluate" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Evaluate</span></code> method performs the evaluation (i.e., using the test set) of the model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">met</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">inp_test</span><span class="p">,</span> <span class="n">arcnode_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It gives as output the accuracy on the set given as input, <code class="docutils literal notranslate"><span class="pre">met</span></code>.</p>
+</div>
+<div class="section" id="predict">
+<h2>Predict<a class="headerlink" href="#predict" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Predict</span></code> method can be used to compute the output of each node of the GNN model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">Evaluate</span><span class="p">(</span><span class="n">inp_test</span><span class="p">,</span> <span class="n">arcnode_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It gives as output the output values of the output function (all the nodes output for all the graphs (if node-based) or a single output for each graph (if graph based), <code class="docutils literal notranslate"><span class="pre">pr</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Install (or Download) and import" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matteo Tiezzi
+      <span class="lastupdated">
+        Last updated on Aug 20, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

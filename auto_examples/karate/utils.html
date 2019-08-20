@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utils &mdash; gnn 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #e15e26" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> gnn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../GNN/index.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install (or Download) and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gnn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-karate-utils-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="utils">
+<span id="sphx-glr-auto-examples-karate-utils-py"></span><h1>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h1>
+<p>Common utilities for data loading and preparation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="kn">as</span> <span class="nn">sio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">coo_matrix</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="n">SparseMatrix</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;SparseMatrix&quot;</span><span class="p">,</span> <span class="s2">&quot;indices values dense_shape&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">GetInput</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">lab</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">grafi</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;grafi is vector with same cardinaluty of nodes, denoting to which graph</span>
+<span class="sd">        belongs each node</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># numero di batch</span>
+    <span class="n">batch_number</span> <span class="o">=</span> <span class="n">grafi</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">//</span> <span class="n">batch</span>   <span class="c1"># if only one graph =&gt; grafi.max() is 0 =&gt; batch_number == 0</span>
+    <span class="c1"># dataframe containing adjacency matrix</span>
+    <span class="n">dmat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="s2">&quot;id_2&quot;</span><span class="p">])</span>
+    <span class="c1"># dataframe containing labels each node</span>
+    <span class="n">dlab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lab&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="c1"># darch=pd.DataFrame(arc, columns=[&quot;arch&quot;+str(i) for i in range(0,arc.shape[1])])</span>
+    <span class="c1"># dataframe denoting graph belonging each node</span>
+    <span class="n">dgr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grafi</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">])</span>
+
+    <span class="c1"># creating input : id_p, id_c, label_p, label_c, graph_belong</span>
+    <span class="n">dresult</span> <span class="o">=</span> <span class="n">dmat</span>
+    <span class="n">dresult</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dresult</span><span class="p">,</span> <span class="n">dlab</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">dresult</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dresult</span><span class="p">,</span> <span class="n">dlab</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;id_2&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="c1"># dresult=pd.concat([dresult, darch], axis=1)</span>
+    <span class="n">dresult</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dresult</span><span class="p">,</span> <span class="n">dgr</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+    <span class="n">data_batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">arcnode_batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nodegraph_batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">node_in</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># creating batch data =&gt; for each batch, redefining the id so that they start from 0 index</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+
+        <span class="c1"># getting minimum index of the current batch</span>
+        <span class="n">grafo_indexMin</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">batch</span><span class="p">)</span>
+        <span class="n">grafo_indexMax</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">batch</span><span class="p">)</span> <span class="o">+</span> <span class="n">batch</span>
+
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">dresult</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">dresult</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">grafo_indexMin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dresult</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grafo_indexMax</span><span class="p">)]</span>
+        <span class="n">min_id</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[[</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="s2">&quot;id_2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+        <span class="c1">#start from 0 index for the new batch</span>
+        <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_1&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_id</span>
+        <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_2&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_id</span>
+
+        <span class="n">min_gr</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_gr</span>
+
+        <span class="c1"># append values to batches : id_2, lab0_1, lab1_1, lab0_2, lab1_2 (excluded first and last - id_p and graph_id)</span>
+        <span class="n">data_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># arcMat creation</span>
+
+        <span class="c1"># max_id of nodes in the current batch</span>
+        <span class="n">max_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">adj</span><span class="p">[[</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="s2">&quot;id_2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+        <span class="n">max_gr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+        <span class="c1"># getting ids of nodes (p and c)</span>
+        <span class="n">mt</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[[</span><span class="s2">&quot;id_1&quot;</span><span class="p">,</span> <span class="s2">&quot;id_2&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># arcnode matrix : first shape same as arcs, second same as nodes in the batch</span>
+        <span class="n">arcnode</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">mt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">max_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># arcnode: state of parent node = sum (h(state of all the neighbors ,..) (of the parent node)</span>
+        <span class="c1"># =&gt; sum contributes of all the arcs involving the parent</span>
+        <span class="c1"># in j-th arc (row) =&gt; put one in the position corresponding to the parent node&#39;s column</span>
+        <span class="c1"># =&gt; found in the adjacnecy matrix in j-th row, 1 st position</span>
+
+        <span class="c1"># for j in range(0, mt.shape[0]):</span>
+        <span class="c1">#     arcnode[j][mt[j][0]] = 1</span>
+
+        <span class="n">arcnode</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">mt</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mt</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">mt</span><span class="p">)]),</span>
+                               <span class="n">dense_shape</span><span class="o">=</span><span class="p">[</span><span class="n">max_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mt</span><span class="p">)])</span>
+
+        <span class="n">arcnode_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arcnode</span><span class="p">)</span>
+
+        <span class="c1"># nodegraph</span>
+        <span class="n">nodegraph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">max_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_gr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">adj</span><span class="p">[[</span><span class="s2">&quot;graph&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_1&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="s2">&quot;id_2&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">t</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">nodegraph</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">nodegraph_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodegraph</span><span class="p">)</span>
+        <span class="c1"># node number in each graph</span>
+        <span class="n">grbtc</span> <span class="o">=</span> <span class="n">dgr</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">dgr</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">grafo_indexMin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">dgr</span><span class="p">[</span><span class="s2">&quot;graph&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">grafo_indexMax</span><span class="p">)]</span>
+        <span class="c1">#counting number nodes in current batch</span>
+        <span class="n">node_in</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grbtc</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;graph&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_batch</span><span class="p">,</span> <span class="n">arcnode_batch</span><span class="p">,</span> <span class="n">nodegraph_batch</span><span class="p">,</span> <span class="n">node_in</span>
+
+
+<span class="k">def</span> <span class="nf">set_load_subgraph</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">set_type</span><span class="p">):</span>
+    <span class="c1"># load adjacency list</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">set_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;Wrong set name!&#39;</span><span class="p">)</span>
+
+        <span class="c1"># load adjacency list</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;conmat{}.mat&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)))</span>
+        <span class="c1"># load adiacenyc matrixc in sparse format</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="s2">&quot;conmat_{}set&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">adj</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">adj</span><span class="o">.</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># load node label</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;nodelab{}.mat&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)))</span>
+        <span class="n">lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="s2">&quot;nodelab_{}set&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># load target and convert to one-hot encoding</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;tar{}.mat&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)))</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="s2">&quot;target_{}set&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+        <span class="c1"># one-hot encoding of targets</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># compute inputs and arcnode</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span> <span class="o">=</span> <span class="n">GetInput</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">lab</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span> <span class="c1"># last argument: graph to which each node belongs</span>
+        <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">lab</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Caught exception: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">set_load_clique</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">set_type</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">load</span> <span class="kn">as</span> <span class="nn">ld</span>
+    <span class="c1"># load adjacency list</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">]</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">ld</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;cliquedataset.mat&quot;</span><span class="p">))</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;dataSet&quot;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">set_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;Wrong set name!&#39;</span><span class="p">)</span>
+
+        <span class="c1"># load adjacency list</span>
+        <span class="c1"># take adjacency list</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;connMatrix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">adj</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">adj</span><span class="o">.</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># take node labels</span>
+        <span class="n">lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;nodeLabels&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># take targets and convert to one-hot encoding</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;targets&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># compute inputs and arcnode</span>
+        <span class="n">get_lab</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">set_type</span> <span class="o">==</span> <span class="s2">&quot;train&quot;</span> <span class="k">else</span> <span class="n">lab</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span> <span class="o">=</span> <span class="n">GetInput</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">get_lab</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                                                           <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span><span class="p">,</span> <span class="n">labels</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Caught exception: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">set_load_mutag</span><span class="p">(</span><span class="n">set_type</span><span class="p">,</span> <span class="n">train</span><span class="p">):</span>
+    <span class="c1"># load adjacency list</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">set_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;Wrong set name!&#39;</span><span class="p">)</span>
+
+            <span class="c1">############ training set #############</span>
+
+            <span class="c1"># take adjacency list</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;connMatrix&#39;</span><span class="p">])</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">adj</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">adj</span><span class="o">.</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># take node labels</span>
+        <span class="n">lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;nodeLabels&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s2">&quot;maskMatrix&quot;</span><span class="p">])</span>
+
+        <span class="c1"># take target, generate output for each graph, and convert to one-hot encoding</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;targets&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">col</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">target</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span>
+        <span class="c1"># target = target[target != 0] # equivalent code</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># build graph indices</span>
+        <span class="n">gr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">gr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]):</span>
+                <span class="n">indicator</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">gr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">adj</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">indicator</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">indicator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">indicator</span><span class="p">)</span>
+
+        <span class="c1"># take input, arcnode matrix, nodegraph matrix</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span> <span class="o">=</span> <span class="n">GetInput</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">lab</span><span class="p">,</span> <span class="n">indicator</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">indicator</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span><span class="p">,</span> <span class="n">labels</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Caught exception: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">set_load_general</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">set_type</span><span class="p">,</span> <span class="n">set_name</span><span class="o">=</span><span class="s2">&quot;sub_30_15&quot;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">load</span> <span class="kn">as</span> <span class="nn">ld</span>
+    <span class="c1"># load adjacency list</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">]</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">ld</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;{}.mat&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_name</span><span class="p">)))</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;dataSet&quot;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">set_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;Wrong set name!&#39;</span><span class="p">)</span>
+
+        <span class="c1"># load adjacency list</span>
+        <span class="c1"># take adjacency list</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;connMatrix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">adj</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="n">adj</span><span class="o">.</span><span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># take node labels</span>
+        <span class="n">lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;nodeLabels&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># if clique (labels with only one dimension</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">lab</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># take targets and convert to one-hot encoding</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;{}Set&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">set_type</span><span class="p">)][</span><span class="s1">&#39;targets&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># compute inputs and arcnode</span>
+
+        <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span> <span class="o">=</span> <span class="n">GetInput</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">lab</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                                                           <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="n">nodein</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">lab</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Caught exception: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">load_karate</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/karate-club/&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load karate club dataset&quot;&quot;&quot;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Loading karate club dataset...&#39;</span><span class="p">)</span>
+
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;{}edges.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># 0-based indexing</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">lexsort</span><span class="p">((</span><span class="n">edges</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">edges</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))]</span>  <span class="c1"># reorder list of edges also by second column</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">edges</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="n">idx_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;{}mod-based-clusters.txt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">idx_labels</span> <span class="o">=</span> <span class="n">idx_labels</span><span class="p">[</span><span class="n">idx_labels</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()]</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">idx_labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)[</span><span class="n">idx_labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]]</span>  <span class="c1"># one-hot encoding of labels</span>
+
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">edges</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">features</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
+
+
+<span class="k">def</span> <span class="nf">from_EN_to_GNN</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param E: # E matrix - matrix of edges : [[id_p, id_c, graph_id],...]</span>
+<span class="sd">    :param N: # N matrix - [node_features, graph_id (to which the node belongs)]</span>
+<span class="sd">    :return: # L matrix - list of graph targets [tar_g_1, tar_g_2, ...]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N_full</span> <span class="o">=</span> <span class="n">N</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># avoid graph_id</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">E</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># take only first tow columns =&gt; id_p, id_c</span>
+    <span class="n">feat_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># take id_p and id_c  =&gt; (n_archs, 2, label_dim)</span>
+    <span class="n">feat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">feat_temp</span><span class="p">,</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># (n_archs, 2*label_dim) =&gt; [[label_p, label_c], ...]</span>
+    <span class="c1"># creating input for gnn =&gt; [id_p, id_c, label_p, label_c]</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">E</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">feat</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># creating arcnode matrix, but transposed</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1 1 0 0 0 0 0</span>
+<span class="sd">    0 0 1 1 0 0 0</span>
+<span class="sd">    0 0 0 0 1 1 1</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># for the indices where to insert the ones, stack the id_p and the column id (single 1 for column)</span>
+    <span class="n">arcnode</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">E</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                           <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+                           <span class="n">dense_shape</span><span class="o">=</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)])</span>
+
+    <span class="c1"># get the number of graphs =&gt; from the graph_id</span>
+    <span class="n">num_graphs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">N_full</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># get all graph_ids</span>
+    <span class="n">g_ids</span> <span class="o">=</span> <span class="n">N_full</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">g_ids</span> <span class="o">=</span> <span class="n">g_ids</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="c1"># creating graphnode matrix =&gt; create identity matrix get row corresponding to id of the graph</span>
+    <span class="c1"># graphnode = np.take(np.eye(num_graphs), g_ids, axis=0).T</span>
+    <span class="c1"># substitued with same code as before</span>
+    <span class="n">graphnode</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">g_ids</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">g_ids</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                             <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">g_ids</span><span class="p">)])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+                             <span class="n">dense_shape</span><span class="o">=</span><span class="p">[</span><span class="n">num_graphs</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span>
+
+    <span class="c1"># print(graphnode.shape)</span>
+
+    <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">arcnode</span><span class="p">,</span> <span class="n">graphnode</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-karate-utils-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/20de2b38ba28e8a7289f9d38ba0321c6/utils.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">utils.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/caafa7cb878333e48afa1a3081c1c964/utils.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">utils.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matteo Tiezzi
+      <span class="lastupdated">
+        Last updated on Aug 20, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
