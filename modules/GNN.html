@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GNN &mdash; gnn 1.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #e15e26" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> gnn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../GNN/index.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install (or Download) and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gnn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>GNN</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for GNN</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">time</span>
+
+<span class="c1"># class for the core of the architecture</span>
+<div class="viewcode-block" id="GNN"><a class="viewcode-back" href="../tutorial.html#GNN.GNN">[docs]</a><span class="k">class</span> <span class="nc">GNN</span><span class="p">:</span>
+<div class="viewcode-block" id="GNN.__init__"><a class="viewcode-back" href="../tutorial.html#GNN.GNN.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">,</span>  <span class="n">input_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">max_it</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">graph_based</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">param</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">_%H-%M-%S&#39;</span><span class="p">)),</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tensorboard</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">               create GNN instance. Feed this parameters:</span>
+
+<span class="sd">               :net:  Net instance - it contains state network, output network, initialized weights, loss function and metric;</span>
+<span class="sd">               :input_dim: dimension of the input</span>
+<span class="sd">               :output_dim: dimension of the output</span>
+<span class="sd">               :state_dim: dimension for the state</span>
+<span class="sd">               :max_it:  maximum number of iteration of the state convergence procedure</span>
+<span class="sd">               :optimizer:  optimizer instance</span>
+<span class="sd">               :learning_rate: learning rate value</span>
+<span class="sd">               :threshold:  value to establish the state convergence</span>
+<span class="sd">               :graph_based: flag to denote a graph based problem</span>
+<span class="sd">               :param: name of the experiment</span>
+<span class="sd">               :config: ConfigProto protocol buffer object, to set configuration options for a session</span>
+<span class="sd">               :tensorboard:  boolean flag to activate tensorboard</span>
+<span class="sd">               &quot;&quot;&quot;</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">set_random_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span> <span class="o">=</span> <span class="n">tensorboard</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="n">max_it</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">net</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;optim&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="n">output_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">=</span> <span class="n">state_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_based</span> <span class="o">=</span> <span class="n">graph_based</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+        <span class="c1">#self.session = tf.Session()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_l</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">local_variables_initializer</span><span class="p">()</span>
+
+        <span class="c1"># parameter to monitor the learning via tensorboard and to save the model</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merged_all</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;always&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merged_train</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merged_val</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">merge_all</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">FileWriter</span><span class="p">(</span><span class="s1">&#39;tmp/&#39;</span> <span class="o">+</span> <span class="n">param</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span></div>
+        <span class="c1"># self.saver = tf.train.Saver()</span>
+        <span class="c1"># self.save_path = &quot;tmp/&quot; + param + &quot;saves/model.ckpt&quot;</span>
+
+<div class="viewcode-block" id="GNN.VariableState"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.VariableState">[docs]</a>    <span class="k">def</span> <span class="nf">VariableState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Define placeholders for input, output, state, state_old, arch-node conversion matrix&#39;&#39;&#39;</span>
+        <span class="c1"># placeholder for input and output</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+
+        <span class="c1"># state(t) &amp; state(t-1)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;old_state&quot;</span><span class="p">)</span>
+
+        <span class="c1"># arch-node conversion matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sparse_placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ArcNode&quot;</span><span class="p">)</span>
+
+        <span class="c1"># node-graph conversion matrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NodeGraph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NodeGraph&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GNN.build"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.build">[docs]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;build the architecture, setting variable, loss, training&#39;&#39;&#39;</span>
+        <span class="c1"># network</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">VariableState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Loop</span><span class="p">()</span>
+
+        <span class="c1"># loss</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">Loss</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+            <span class="c1"># val loss</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">val_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">Loss</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">summ_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">summ_val_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loss</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+
+        <span class="c1"># optimizer</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">compute_gradients</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train_op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grads</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;train_op&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">grad</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grads</span><span class="p">):</span>
+                    <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-grad&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grads</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">grads</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                                         <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;always&#39;</span><span class="p">])</span>
+
+        <span class="c1"># metrics</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;metrics&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">Metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># val metric</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;val_metric&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">val_met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">Metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">summ_val_met</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="s1">&#39;val_metric&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_met</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;always&#39;</span><span class="p">])</span></div>
+
+    <span class="k">def</span> <span class="nf">convergence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;Convergence&#39;</span><span class="p">):</span>
+            <span class="c1"># body of the while cicle used to iteratively calculate state</span>
+
+            <span class="c1"># assign current state to old state</span>
+            <span class="n">old_state</span> <span class="o">=</span> <span class="n">state</span>
+
+            <span class="c1"># grub states of neighboring node</span>
+            <span class="n">gat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">old_state</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+
+            <span class="c1"># slice to consider only label of the node and that of it&#39;s neighbor</span>
+            <span class="c1"># sl = tf.slice(a, [0, 1], [tf.shape(a)[0], tf.shape(a)[1] - 1])</span>
+            <span class="c1"># equivalent code</span>
+            <span class="n">sl</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+            <span class="c1"># concat with retrieved state</span>
+            <span class="n">inp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">sl</span><span class="p">,</span> <span class="n">gat</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># evaluate next state and multiply by the arch-node conversion matrix to obtain per-node states</span>
+            <span class="n">layer1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">netSt</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sparse_tensor_dense_matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">,</span> <span class="n">layer1</span><span class="p">)</span>
+
+            <span class="c1"># update the iteration counter</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">k</span>
+
+    <span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">old_state</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="c1"># evaluate condition on the convergence of the state</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;condition&#39;</span><span class="p">):</span>
+            <span class="c1"># evaluate distance by state(t) and state(t-1)</span>
+            <span class="n">outDistance</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">old_state</span><span class="p">)),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.00000000001</span><span class="p">)</span>
+            <span class="c1"># vector showing item converged or not (given a certain threshold)</span>
+            <span class="n">checkDistanceVec</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">greater</span><span class="p">(</span><span class="n">outDistance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_threshold</span><span class="p">)</span>
+
+            <span class="n">c1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_any</span><span class="p">(</span><span class="n">checkDistanceVec</span><span class="p">)</span>
+            <span class="n">c2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">Loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># call to loop for the state computation and compute the output</span>
+        <span class="c1"># compute state</span>
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">variable_scope</span><span class="p">(</span><span class="s1">&#39;Loop&#39;</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">old_st</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="p">,</span>
+                                                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">,</span> <span class="n">k</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">summ_iter</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">scalar</span><span class="p">(</span><span class="s1">&#39;iteration&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">collections</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;always&#39;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_based</span><span class="p">:</span>
+                <span class="n">stf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">st</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">NodeGraph</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stf</span> <span class="o">=</span> <span class="n">st</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">netOut</span><span class="p">(</span><span class="n">stf</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">num</span>
+
+<div class="viewcode-block" id="GNN.Train"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.Train">[docs]</a>    <span class="k">def</span> <span class="nf">Train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">ArcNode</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">nodegraph</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; train methods: has to receive the inputs, arch-node matrix , target,</span>
+<span class="sd">        and optionally nodegraph indicator &#39;&#39;&#39;</span>
+
+        <span class="c1"># Creating a SparseTEnsor with the feeded ArcNode Matrix</span>
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">NodeGraph</span><span class="p">:</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">:</span> <span class="n">target</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="n">merge_all</span><span class="p">,</span> <span class="n">merge_tr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">train_op</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_all</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_train</span><span class="p">],</span>
+                <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">merge_all</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">merge_tr</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">train_op</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">],</span>
+                <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">loop</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="GNN.Validate"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.Validate">[docs]</a>    <span class="k">def</span> <span class="nf">Validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inptVal</span><span class="p">,</span> <span class="n">arcnodeVal</span><span class="p">,</span> <span class="n">targetVal</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">nodegraph</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Takes care of the validation of the model - it outputs, regarding the set given as input,</span>
+<span class="sd">         the loss value, the accuracy (custom defined in the Net file), the number of iteration</span>
+<span class="sd">         in the convergence procedure &quot;&quot;&quot;</span>
+
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">arcnodeVal</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">arcnodeVal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">arcnodeVal</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+
+        <span class="n">fd_val</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">NodeGraph</span><span class="p">:</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inptVal</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">arcnodeVal</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">arcnodeVal</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">:</span> <span class="n">targetVal</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+            <span class="n">loss_val</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="n">merge_all</span><span class="p">,</span> <span class="n">merge_val</span><span class="p">,</span> <span class="n">metr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">val_loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_all</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd_val</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">merge_all</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_summary</span><span class="p">(</span><span class="n">merge_val</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loss_val</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="n">metr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">val_loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd_val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss_val</span><span class="p">,</span> <span class="n">metr</span><span class="p">,</span> <span class="n">loop</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">Evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">st_old</span><span class="p">,</span> <span class="n">ArcNode</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;evaluate method with initialized state -- not used for the moment: has to receive the inputs,</span>
+<span class="sd">        initialization for state(t) and state(t-1),</span>
+<span class="sd">        arch-node matrix conversion, target -- gives as output the accuracy on the set given as input&#39;&#39;&#39;</span>
+
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">st</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">st_old</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">:</span> <span class="n">target</span><span class="p">}</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">init_l</span><span class="p">])</span>
+        <span class="n">met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">met</span>
+
+<div class="viewcode-block" id="GNN.Evaluate"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.Evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">Evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">ArcNode</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">nodegraph</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;evaluate methods: has to receive the inputs,  arch-node matrix conversion, target</span>
+<span class="sd">         -- gives as output the accuracy on the set given as input&#39;&#39;&#39;</span>
+
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">NodeGraph</span><span class="p">:</span> <span class="n">nodegraph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">:</span> <span class="n">target</span><span class="p">}</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">init_l</span><span class="p">])</span>
+        <span class="n">met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">met</span></div>
+
+    <span class="k">def</span> <span class="nf">Predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">st</span><span class="p">,</span> <span class="n">st_old</span><span class="p">,</span> <span class="n">ArcNode</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; predict methods with initialized state -- not used for the moment:: has to receive the inputs,</span>
+<span class="sd">         initialization for state(t) and state(t-1),</span>
+<span class="sd">         arch-node matrix conversion -- gives as output the output values of the output function (all the nodes output</span>
+<span class="sd">         for all the graphs (if node-based) or a single output for each graph (if graph based) &#39;&#39;&#39;</span>
+
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">st</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">st_old</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">}</span>
+        <span class="n">pr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="GNN.Predict"><a class="viewcode-back" href="../reference/introduction.html#GNN.GNN.Predict">[docs]</a>    <span class="k">def</span> <span class="nf">Predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">ArcNode</span><span class="p">,</span> <span class="n">nodegraph</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; predict methods: has to receive the inputs, arch-node matrix conversion -- gives as output the output</span>
+<span class="sd">         values of the output function (all the nodes output</span>
+<span class="sd">         for all the graphs (if node-based) or a single output for each graph (if graph based) &#39;&#39;&#39;</span>
+
+        <span class="n">arcnode_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">SparseTensorValue</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                        <span class="n">dense_shape</span><span class="o">=</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">)</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">comp_inp</span><span class="p">:</span> <span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">state_old</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">ArcNode</span><span class="o">.</span><span class="n">dense_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span><span class="p">)),</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">ArcNode</span><span class="p">:</span> <span class="n">arcnode_</span><span class="p">}</span>
+        <span class="n">pr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">loss_op</span><span class="p">],</span> <span class="n">feed_dict</span><span class="o">=</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Matteo Tiezzi
+      <span class="lastupdated">
+        Last updated on Jul 27, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
