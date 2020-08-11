@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview of the Graph Neural Network model - GNN &mdash; gnn 1.1.0 documentation</title>
+  <title>Overview of the Graph Neural Network model - GNN &mdash; gnn 1.2.0 documentation</title>
   
 
   
@@ -50,6 +50,7 @@
     </script>
 
 
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -73,7 +74,7 @@
             
             
               <div class="version">
-                1.1
+                1.2
               </div>
             
           
@@ -99,8 +100,10 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="GNN/index.html">Graph Neural Network</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Install (or Download) and import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">PyTorch Install and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html#tensorflow-install-or-download-and-import">Tensorflow Install (or Download) and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tensorflow Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PyTorch.html">PyTorch Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing</a></li>
@@ -176,6 +179,10 @@
 <p>The Graph Neural Network (GNN) <a class="reference internal" href="bibliography.html#scarselli2009thegn" id="id1">[SGT+09b]</a> is a connectionist model particularly suited for problems whose domain can be represented by a set of patterns and relationships between them.</p>
 <p>In those problems, a prediction about a given pattern can be carried out exploiting all the related information, which includes the pattern features, the pattern relationships and, in general, the whole graph that represents the domain. GNN peculiarity consists in its capability of computing the output prediction processing directly the input domain graph, without any preprocessing into a vectorial representation.</p>
 <p>GNNs have been proved to be a universal approximator for a class of functions on graphs and have been applied to several tasks, including spam detection, object localization in images, molecule classification.</p>
+<div class="section" id="pytorch">
+<h2>PyTorch<a class="headerlink" href="#pytorch" title="Permalink to this headline">¶</a></h2>
+<p>We provide a novel implementation which exploits the PyTorch framework. We simplified  the GNN creation, and provide several tools for input creation (including some utilities and examples on using Deep Graph Library (DGL) input data.)</p>
+</div>
 <div class="section" id="tensorflow">
 <h2>Tensorflow<a class="headerlink" href="#tensorflow" title="Permalink to this headline">¶</a></h2>
 <p>The GNN was originally implemented in <a class="reference external" href="http://www.dii.unisi.it/~franco/Research/GNN.php">MATLAB</a> but  nowadays frameworks such as Tensorflow are more popular in the machine learning community.</p>
@@ -195,23 +202,26 @@ Join us on <a class="reference external" href="https://github.com/mtiezzi/gnn">G
 <div class="section" id="history">
 <h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
 <p>The original MATLAB version was designed and written by <a class="reference external" href="https://sailab.diism.unisi.it/people/franco-scarselli/">Franco Scarselli</a> and Gabriele Monfardini in 2011.</p>
+<p>The PyTorch porting was written by <a class="reference external" href="http://sailab.diism.unisi.it/people/matteo-tiezzi/">Matteo Tiezzi</a>, PhD Student at the <a class="reference external" href="http://sailab.diism.unisi.it/">SAILab</a>,  in May 2020.</p>
 <p>The Tensorflow porting was written by <a class="reference external" href="http://sailab.diism.unisi.it/people/alberto-rossi/">Alberto Rossi</a>  and <a class="reference external" href="http://sailab.diism.unisi.it/people/matteo-tiezzi/">Matteo Tiezzi</a>, PhD Students at the <a class="reference external" href="http://sailab.diism.unisi.it/">SAILab</a>,  in January 2018.</p>
 </div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="field-list simple">
 <dt class="field-odd">Release</dt>
-<dd class="field-odd"><p>1.1</p>
+<dd class="field-odd"><p>1.2</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>Aug 21, 2019</p>
+<dd class="field-even"><p>Aug 11, 2020</p>
 </dd>
 </dl>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="GNN/index.html">Graph Neural Network</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Install (or Download) and import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">PyTorch Install and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html#tensorflow-install-or-download-and-import">Tensorflow Install (or Download) and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tensorflow Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PyTorch.html">PyTorch Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing</a></li>
@@ -248,9 +258,9 @@ Join us on <a class="reference external" href="https://github.com/mtiezzi/gnn">G
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Matteo Tiezzi
+        &copy; Copyright 2020, Matteo Tiezzi
       <span class="lastupdated">
-        Last updated on Aug 21, 2019.
+        Last updated on Aug 11, 2020.
       </span>
 
     </p>
