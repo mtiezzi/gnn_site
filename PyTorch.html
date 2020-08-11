@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reference" href="reference/index.html" />
-    <link rel="prev" title="Tensorflow Tutorial" href="tutorial.html" /> 
+    <link rel="next" title="Tensorflow Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Install and import" href="install.html" /> 
      <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146116592-1"></script>
     <script>
@@ -102,7 +102,6 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="GNN/index.html">Graph Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Install and import</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tensorflow Tutorial</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">PyTorch Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#simple-usage-example">Simple usage example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#simple-toy-example-for-input-formatting">Simple toy example for input formatting</a></li>
@@ -110,7 +109,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#model-definition">Model definition</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#input-data">Input data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#arcnode">ArcNode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#nodegraph">NodeGraph</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#en-input">EN Input</a></li>
 </ul>
 </li>
@@ -122,6 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#test">Test</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tensorflow Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="citing.html">Citing</a></li>
@@ -231,13 +230,13 @@
 </div>
 </div>
 <div class="section" id="simple-toy-example-for-input-formatting">
-<span id="simple"></span><h2>Simple toy example for input formatting<a class="headerlink" href="#simple-toy-example-for-input-formatting" title="Permalink to this headline">¶</a></h2>
+<span id="simple-pytorch"></span><h2>Simple toy example for input formatting<a class="headerlink" href="#simple-toy-example-for-input-formatting" title="Permalink to this headline">¶</a></h2>
 <p>Input composed by two graphs:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="_images/g1.png"><img alt="_images/g1.png" src="_images/g1.png" style="width: 49%;" /></a>
 <a class="reference internal image-reference" href="_images/g2.png"><img alt="_images/g2.png" src="_images/g2.png" style="width: 49%;" /></a>
 </div></blockquote>
-<p>This graphs can be described in the <a class="reference internal" href="tutorial.html#enmatrices"><span class="std std-ref">EN Input</span></a> format.</p>
+<p>This graphs can be described in the <a class="reference internal" href="#enmatrices-pytorch"><span class="std std-ref">EN Input</span></a> format.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">E</span></code> matrix describing the first graph ( <code class="docutils literal notranslate"><span class="pre">[[id_p,</span> <span class="pre">id_c,</span> <span class="pre">graph_id],...]</span></code>):</p>
 <a class="reference internal image-reference" href="_images/g1.png"><img alt="_images/g1.png" class="align-right" src="_images/g1.png" style="width: 45%;" /></a>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
@@ -382,7 +381,7 @@ Hence, inputs to the model must be specified as an ordered edge list.</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We provide a novel utility to compose this kind of input, given a description of the graph dataset in an E-N format. See section  <a class="reference internal" href="tutorial.html#enmatrices"><span class="std std-ref">EN Input</span></a>.</p>
+<p>We provide a novel utility to compose this kind of input, given a description of the graph dataset in an E-N format. See section  <a class="reference internal" href="#enmatrices-pytorch"><span class="std std-ref">EN Input</span></a>.</p>
 </div>
 <div class="section" id="arcnode">
 <h4>ArcNode<a class="headerlink" href="#arcnode" title="Permalink to this headline">¶</a></h4>
@@ -393,13 +392,8 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
 </a>
 </div></blockquote>
 </div>
-<div class="section" id="nodegraph">
-<h4>NodeGraph<a class="headerlink" href="#nodegraph" title="Permalink to this headline">¶</a></h4>
-<p>This matrix must be defined only in the case of Graph-based problems. See <a class="reference internal" href="GNN/software.html#graph-based"><span class="std std-ref">Graph–Based Output function</span></a> for more information.</p>
-<p>We provide a <code class="docutils literal notranslate"><span class="pre">Library</span></code> to generate these inputs for the simple benchmarks reported in our research papers <a class="reference internal" href="auto_examples/index.html#examples-gallery"><span class="std std-ref">Examples</span></a>.</p>
-</div>
 <div class="section" id="en-input">
-<span id="enmatrices"></span><h4>EN Input<a class="headerlink" href="#en-input" title="Permalink to this headline">¶</a></h4>
+<span id="enmatrices-pytorch"></span><h4>EN Input<a class="headerlink" href="#en-input" title="Permalink to this headline">¶</a></h4>
 <p>To simplify the input creation, we provide an utility in the <code class="docutils literal notranslate"><span class="pre">utils.py</span></code> file, the <code class="docutils literal notranslate"><span class="pre">from_EN_to_GNN(E,</span> <span class="pre">N)</span></code> function.</p>
 <p>The user can describe the dataset in the EN format:</p>
 <blockquote>
@@ -417,7 +411,7 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
 </dl>
 </div></blockquote>
 <p>The <code class="docutils literal notranslate"><span class="pre">from_EN_to_GNN</span></code> util takes this two array as input (<code class="docutils literal notranslate"><span class="pre">E</span></code> <code class="docutils literal notranslate"><span class="pre">N</span></code> ) and returns the formatted input for the GNN model, <code class="docutils literal notranslate"><span class="pre">inp</span></code>, <code class="docutils literal notranslate"><span class="pre">arcnode</span></code>, <code class="docutils literal notranslate"><span class="pre">graphnode</span></code>.</p>
-<p>See <a class="reference internal" href="tutorial.html#simple"><span class="std std-ref">Simple toy example for input formatting</span></a> for a practical example.</p>
+<p>See <a class="reference internal" href="#simple-pytorch"><span class="std std-ref">Simple toy example for input formatting</span></a> for a practical example.</p>
 </div>
 </div>
 </div>
@@ -486,10 +480,10 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="reference/index.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tensorflow Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tensorflow Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-left" title="Install and import" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
