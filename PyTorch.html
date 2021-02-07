@@ -1,41 +1,47 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>PyTorch Tutorial &mdash; gnn 1.2.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery-rendered-html.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tensorflow Tutorial" href="tutorial.html" />
@@ -92,6 +98,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -131,6 +138,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -165,18 +173,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>PyTorch Tutorial</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
         
       </li>
     
@@ -195,7 +205,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">utils</span>
 <span class="kn">import</span> <span class="nn">dataloader</span>
-<span class="kn">from</span> <span class="nn">gnn_wrapper</span> <span class="k">import</span> <span class="n">GNNWrapper</span><span class="p">,</span> <span class="n">SemiSupGNNWrapper</span>
+<span class="kn">from</span> <span class="nn">gnn_wrapper</span> <span class="kn">import</span> <span class="n">GNNWrapper</span><span class="p">,</span> <span class="n">SemiSupGNNWrapper</span>
 
 <span class="c1"># define GNN configuration</span>
 <span class="n">cfg</span> <span class="o">=</span> <span class="n">GNNWrapper</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
@@ -217,10 +227,7 @@
 <span class="n">E</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">mask_train</span><span class="p">,</span> <span class="n">mask_test</span> <span class="o">=</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">old_load_karate</span><span class="p">()</span>
 <span class="n">dset</span> <span class="o">=</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">from_EN_to_GNN</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">aggregation_type</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">sparse_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># generate the dataset</span>
 
-<span class="c1"># Create the state transition function, output function, loss function and  metrics</span>
-<span class="n">net</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">Net</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">state_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
-
-
+<span class="n">model</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>  <span class="c1"># dataset initalization into the GNN</span>
 
 <span class="c1">#Training</span>
 
@@ -239,7 +246,7 @@
 <p>This graphs can be described in the <a class="reference internal" href="#enmatrices-pytorch"><span class="std std-ref">EN Input</span></a> format.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">E</span></code> matrix describing the first graph ( <code class="docutils literal notranslate"><span class="pre">[[id_p,</span> <span class="pre">id_c,</span> <span class="pre">graph_id],...]</span></code>):</p>
 <a class="reference internal image-reference" href="_images/g1.png"><img alt="_images/g1.png" class="align-right" src="_images/g1.png" style="width: 45%;" /></a>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
 <span class="go">         [0 2 0]</span>
 <span class="go">         [0 4 0]</span>
 <span class="go">         [1 0 0]</span>
@@ -258,7 +265,7 @@
 <p>Note the last column, denoting the id (<code class="docutils literal notranslate"><span class="pre">0</span></code>) of the graph to which the arc belongs.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">E</span></code> matrix describing the second graph:</p>
 <a class="reference internal image-reference" href="_images/g2.png"><img alt="_images/g2.png" class="align-right" src="_images/g2.png" style="width: 45%;" /></a>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]</span>
 <span class="go">         [0 3 1]</span>
 <span class="go">         [1 2 1]</span>
 <span class="go">         [1 3 1]</span>
@@ -276,7 +283,7 @@
 </div>
 <p>Note the last column, denoting the id (<code class="docutils literal notranslate"><span class="pre">1</span></code>) of the graph to which the arc belongs .</p>
 <p>The global <code class="docutils literal notranslate"><span class="pre">E_tot</span></code> matrix (with incremental node ids):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E_tot</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E_tot</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
 <span class="go">             [0 2 0]</span>
 <span class="go">             [0 4 0]</span>
 <span class="go">             [1 0 0]</span>
@@ -303,7 +310,7 @@
 </pre></div>
 </div>
 <p>The global <code class="docutils literal notranslate"><span class="pre">N</span></code> matrix ( in this simple case, each node has a different one-hot feature) (<code class="docutils literal notranslate"><span class="pre">[[node_features,</span> <span class="pre">graph_id],...</span> <span class="pre">]</span></code>) :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
 <span class="go">         [0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]</span>
 <span class="go">         [0. 0. 1. 0. 0. 0. 0. 0. 0. 0.]</span>
 <span class="go">         [0. 0. 0. 1. 0. 0. 0. 0. 0. 0.]</span>
@@ -376,8 +383,7 @@ Hence, inputs to the model must be specified as an ordered edge list.</p>
 <li><p>the <strong>edge label</strong> (if available)</p></li>
 </ul>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/input.svg"><div align="center" class="align-center"><img alt="_images/input.svg" src="_images/input.svg" width="70%" /></div>
-</a>
+<div><a class="reference internal image-reference" href="_images/input.svg"><img alt="_images/input.svg" class="align-center" src="_images/input.svg" width="70%" /></a>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -388,8 +394,7 @@ Hence, inputs to the model must be specified as an ordered edge list.</p>
 <p>In order to aggregate the state per node, a matrix multiplication with an edge–node matrix  is performed. The matrix encodes which arcs affect a certain node (see <a class="reference internal" href="GNN/software.html#matrix-based"><span class="std std-ref">Matrix-based implementation</span></a>).
 This matrix (<code class="docutils literal notranslate"><span class="pre">arcnode</span></code>) is sparse, to save memory.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="_images/arcnode.svg"><div align="center" class="align-center"><img alt="_images/arcnode.svg" src="_images/arcnode.svg" width="50%" /></div>
-</a>
+<div><a class="reference internal image-reference" href="_images/arcnode.svg"><img alt="_images/arcnode.svg" class="align-center" src="_images/arcnode.svg" width="50%" /></a>
 </div></blockquote>
 </div>
 <div class="section" id="en-input">
@@ -418,31 +423,31 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
 <div class="section" id="state-and-output-function-definition">
 <h2>State and output function definition<a class="headerlink" href="#state-and-output-function-definition" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to define the structure of these functions using the configurator:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">state_transition_hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">state_transition_hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">output_function_hidden_dims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The state dimension, convergence threshold and maximum number of iterations are defined via:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">convergence_threshold</span> <span class="o">=</span> <span class="mf">0.01</span>
 </pre></div>
 </div>
 <p>Afterwards, the GNN model can be defined using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">GNNWrapper</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">GNNWrapper</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this way, the model building is complete.</p>
 <p>The dataset is generated and given as input to the GNN via:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dset</span> <span class="o">=</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">from_EN_to_GNN</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">N_tot</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">aggregation_type</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">sparse_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># generate the dataset</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dset</span> <span class="o">=</span> <span class="n">dataloader</span><span class="o">.</span><span class="n">from_EN_to_GNN</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">N_tot</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">aggregation_type</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">sparse_matrix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># generate the dataset</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>  <span class="c1"># dataset initalization into the GNN</span>
 </pre></div>
 </div>
 <p>The GNN model handles the dataset. To have more control on the data, check the script <code class="docutils literal notranslate"><span class="pre">gnn_wrapper.py</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In case of a <em>graph-based</em> task, you can specify it troough the config:</p>
+<p>In case of a <em>graph-based</em> task, you can specify it trough the config:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">cfg</span><span class="o">.</span><span class="n">graph_based</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
@@ -477,32 +482,32 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tensorflow Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="install.html" class="btn btn-neutral float-left" title="Install and import" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tensorflow Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="install.html" class="btn btn-neutral float-left" title="Install and import" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Tiezzi
+        &#169; Copyright 2020, Matteo Tiezzi.
       <span class="lastupdated">
-        Last updated on Aug 11, 2020.
+        Last updated on Feb 07, 2021.
       </span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -510,7 +515,6 @@ This matrix (<code class="docutils literal notranslate"><span class="pre">arcnod
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,44 +1,50 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Examples &mdash; gnn 1.2.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Load script utilities" href="simple/load.html" />
+    <link rel="next" title="Main file Subgraph" href="PyTorch_Subgraph/main_subgraph.html" />
     <link rel="prev" title="Bibliography" href="../bibliography.html" /> 
      <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146116592-1"></script>
@@ -92,6 +98,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -109,39 +116,57 @@
 <li class="toctree-l1"><a class="reference internal" href="../citing.html">Citing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#simple">Simple</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="simple/load.html">Load script utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="simple/Net_Simple.html">Net file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="simple/GNN_simple.html">Main file simple</a></li>
-<li class="toctree-l3"><a class="reference internal" href="simple/gnn_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pytorch-subgraph">PyTorch Subgraph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/main_subgraph.html">Main file Subgraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/net.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/pygnn.html">Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/utils.html">Utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/gnn_wrapper.html">Model Wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_Subgraph/dataloader.html">General Dataloder</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#karate">Karate</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="karate/GNN_Karate.html">Main file karate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="karate/load.html">Load script utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="karate/Net_Karate.html">Net file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="karate/gnn_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pytorch-karate">PyTorch Karate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/main_enkarate.html">main Karate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/net.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/pygnn.html">Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/utils.html">Utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/gnn_wrapper.html">Model Wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PyTorch_karate/dataloader.html">General Dataloder</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#subgraph">Subgraph</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="subgraph/load.html">Load script utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="subgraph/Net_Subgraph.html">Net file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="subgraph/GNN_Subgraph.html">Main file subgraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="subgraph/gnn_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow-simple">Tensorflow Simple</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_simple/load.html">Load script utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_simple/Net_Simple.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_simple/GNN_simple.html">Main file simple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_simple/gnn_utils.html">Utils</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#clique">Clique</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="clique/load.html">Load script utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clique/GNN_Clique.html">Main file clique</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clique/Net_Clique.html">Net file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="clique/gnn_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow-karate">Tensorflow Karate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_karate/GNN_Karate.html">Main file karate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_karate/load.html">Load script utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_karate/Net_Karate.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_karate/gnn_utils.html">Utils</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mutag">Mutag</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="mutag/load.html">Load script utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mutag/GNN_Mutag.html">Main file mutag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mutag/Net_Mutag.html">Net file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mutag/gnn_utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow-subgraph">Tensorflow Subgraph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_subgraph/load.html">Load script utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_subgraph/Net_Subgraph.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_subgraph/GNN_Subgraph.html">Main file subgraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_subgraph/gnn_utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow-clique">Tensorflow Clique</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_clique/load.html">Load script utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_clique/GNN_Clique.html">Main file clique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_clique/Net_Clique.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_clique/gnn_utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow-mutag">Tensorflow Mutag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_mutag/load.html">Load script utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_mutag/GNN_Mutag.html">Main file mutag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_mutag/Net_Mutag.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorflow_mutag/gnn_utils.html">Utils</a></li>
 </ul>
 </li>
 </ul>
@@ -151,6 +176,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -185,18 +211,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Examples</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
         
       </li>
     
@@ -212,146 +240,224 @@
 <span id="examples-gallery"></span><span id="sphx-glr-auto-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
 <p>General-purpose and introductory examples for GNN.
 The <a class="reference external" href="../tutorial.html">tutorial</a> introduces conventions and description of the available methods.</p>
-<div style='clear:both'></div><div class="section" id="simple">
-<span id="sphx-glr-auto-examples-simple"></span><h2>Simple<a class="headerlink" href="#simple" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id1">
-<img alt="../_images/sphx_glr_load_thumb.png" src="../_images/sphx_glr_load_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="simple/load.html#sphx-glr-auto-examples-simple-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-clear"></div><div class="section" id="pytorch-subgraph">
+<span id="sphx-glr-auto-examples-pytorch-subgraph"></span><h2>PyTorch Subgraph<a class="headerlink" href="#pytorch-subgraph" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the PyTorch subgraph mathing"><div class="figure align-default" id="id1">
+<img alt="Main file Subgraph" src="../_images/sphx_glr_main_subgraph_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/main_subgraph.html#sphx-glr-auto-examples-pytorch-subgraph-main-subgraph-py"><span class="std std-ref">Main file Subgraph</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the simple problem: state and output transition function definition"><div class="figure align-default" id="id2">
-<img alt="../_images/sphx_glr_Net_Simple_thumb.png" src="../_images/sphx_glr_Net_Simple_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="simple/Net_Simple.html#sphx-glr-auto-examples-simple-net-simple-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the net file for the PyTorch implementation"><div class="figure align-default" id="id2">
+<img alt="Net file" src="../_images/sphx_glr_net_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/net.html#sphx-glr-auto-examples-pytorch-subgraph-net-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the simple classification task"><div class="figure align-default" id="id3">
-<img alt="../_images/sphx_glr_GNN_simple_thumb.png" src="../_images/sphx_glr_GNN_simple_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="simple/GNN_simple.html#sphx-glr-auto-examples-simple-gnn-simple-py"><span class="std std-ref">Main file simple</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the model file for the PyTorch implementation"><div class="figure align-default" id="id3">
+<img alt="Model" src="../_images/sphx_glr_pygnn_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/pygnn.html#sphx-glr-auto-examples-pytorch-subgraph-pygnn-py"><span class="std std-ref">Model</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id4">
-<img alt="../_images/sphx_glr_gnn_utils_thumb.png" src="../_images/sphx_glr_gnn_utils_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="simple/gnn_utils.html#sphx-glr-auto-examples-simple-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the utils file for the PyTorch implementation"><div class="figure align-default" id="id4">
+<img alt="Utils" src="../_images/sphx_glr_utils_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/utils.html#sphx-glr-auto-examples-pytorch-subgraph-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style='clear:both'></div></div>
-<div class="section" id="karate">
-<span id="sphx-glr-auto-examples-karate"></span><h2>Karate<a class="headerlink" href="#karate" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the karate classification task"><div class="figure align-default" id="id5">
-<img alt="../_images/sphx_glr_GNN_Karate_thumb.png" src="../_images/sphx_glr_GNN_Karate_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="karate/GNN_Karate.html#sphx-glr-auto-examples-karate-gnn-karate-py"><span class="std std-ref">Main file karate</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the model wrapper file for the PyTorch implementation"><div class="figure align-default" id="id5">
+<img alt="Model Wrapper" src="../_images/sphx_glr_gnn_wrapper_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/gnn_wrapper.html#sphx-glr-auto-examples-pytorch-subgraph-gnn-wrapper-py"><span class="std std-ref">Model Wrapper</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id6">
-<img alt="../_images/sphx_glr_load_thumb1.png" src="../_images/sphx_glr_load_thumb1.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="karate/load.html#sphx-glr-auto-examples-karate-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the dataloader file for the PyTorch implementation"><div class="figure align-default" id="id6">
+<img alt="General Dataloder" src="../_images/sphx_glr_dataloader_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_Subgraph/dataloader.html#sphx-glr-auto-examples-pytorch-subgraph-dataloader-py"><span class="std std-ref">General Dataloder</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the karate problem: state and output transition function definition"><div class="figure align-default" id="id7">
-<img alt="../_images/sphx_glr_Net_Karate_thumb.png" src="../_images/sphx_glr_Net_Karate_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="karate/Net_Karate.html#sphx-glr-auto-examples-karate-net-karate-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="pytorch-karate">
+<span id="sphx-glr-auto-examples-pytorch-karate"></span><h2>PyTorch Karate<a class="headerlink" href="#pytorch-karate" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the PyTorch Karate club example"><div class="figure align-default" id="id7">
+<img alt="main Karate" src="../_images/sphx_glr_main_enkarate_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/main_enkarate.html#sphx-glr-auto-examples-pytorch-karate-main-enkarate-py"><span class="std std-ref">main Karate</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id8">
-<img alt="../_images/sphx_glr_gnn_utils_thumb1.png" src="../_images/sphx_glr_gnn_utils_thumb1.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="karate/gnn_utils.html#sphx-glr-auto-examples-karate-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the net file for the PyTorch implementation"><div class="figure align-default" id="id8">
+<img alt="Net file" src="../_images/sphx_glr_net_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/net.html#sphx-glr-auto-examples-pytorch-karate-net-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style='clear:both'></div></div>
-<div class="section" id="subgraph">
-<span id="sphx-glr-auto-examples-subgraph"></span><h2>Subgraph<a class="headerlink" href="#subgraph" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id9">
-<img alt="../_images/sphx_glr_load_thumb2.png" src="../_images/sphx_glr_load_thumb2.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="subgraph/load.html#sphx-glr-auto-examples-subgraph-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the model file for the PyTorch implementation"><div class="figure align-default" id="id9">
+<img alt="Model" src="../_images/sphx_glr_pygnn_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/pygnn.html#sphx-glr-auto-examples-pytorch-karate-pygnn-py"><span class="std std-ref">Model</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the subgraph problem: state and output transition function definition"><div class="figure align-default" id="id10">
-<img alt="../_images/sphx_glr_Net_Subgraph_thumb.png" src="../_images/sphx_glr_Net_Subgraph_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="subgraph/Net_Subgraph.html#sphx-glr-auto-examples-subgraph-net-subgraph-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the utils file for the PyTorch implementation"><div class="figure align-default" id="id10">
+<img alt="Utils" src="../_images/sphx_glr_utils_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/utils.html#sphx-glr-auto-examples-pytorch-karate-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the subgraph classification task"><div class="figure align-default" id="id11">
-<img alt="../_images/sphx_glr_GNN_Subgraph_thumb.png" src="../_images/sphx_glr_GNN_Subgraph_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="subgraph/GNN_Subgraph.html#sphx-glr-auto-examples-subgraph-gnn-subgraph-py"><span class="std std-ref">Main file subgraph</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the model wrapper file for the PyTorch implementation"><div class="figure align-default" id="id11">
+<img alt="Model Wrapper" src="../_images/sphx_glr_gnn_wrapper_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/gnn_wrapper.html#sphx-glr-auto-examples-pytorch-karate-gnn-wrapper-py"><span class="std std-ref">Model Wrapper</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id12">
-<img alt="../_images/sphx_glr_gnn_utils_thumb2.png" src="../_images/sphx_glr_gnn_utils_thumb2.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="subgraph/gnn_utils.html#sphx-glr-auto-examples-subgraph-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the dataloader file for the PyTorch implementation"><div class="figure align-default" id="id12">
+<img alt="General Dataloder" src="../_images/sphx_glr_dataloader_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="PyTorch_karate/dataloader.html#sphx-glr-auto-examples-pytorch-karate-dataloader-py"><span class="std std-ref">General Dataloder</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style='clear:both'></div></div>
-<div class="section" id="clique">
-<span id="sphx-glr-auto-examples-clique"></span><h2>Clique<a class="headerlink" href="#clique" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="tensorflow-simple">
+<span id="sphx-glr-auto-examples-tensorflow-simple"></span><h2>Tensorflow Simple<a class="headerlink" href="#tensorflow-simple" title="Permalink to this headline">¶</a></h2>
 <div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id13">
-<img alt="../_images/sphx_glr_load_thumb3.png" src="../_images/sphx_glr_load_thumb3.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="clique/load.html#sphx-glr-auto-examples-clique-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<img alt="Load script utilities" src="../_images/sphx_glr_load_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_simple/load.html#sphx-glr-auto-examples-tensorflow-simple-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the clique classification task"><div class="figure align-default" id="id14">
-<img alt="../_images/sphx_glr_GNN_Clique_thumb.png" src="../_images/sphx_glr_GNN_Clique_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="clique/GNN_Clique.html#sphx-glr-auto-examples-clique-gnn-clique-py"><span class="std std-ref">Main file clique</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the simple problem: state and output transition function definition"><div class="figure align-default" id="id14">
+<img alt="Net file" src="../_images/sphx_glr_Net_Simple_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_simple/Net_Simple.html#sphx-glr-auto-examples-tensorflow-simple-net-simple-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the clique problem: state and output transition function definition"><div class="figure align-default" id="id15">
-<img alt="../_images/sphx_glr_Net_Clique_thumb.png" src="../_images/sphx_glr_Net_Clique_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="clique/Net_Clique.html#sphx-glr-auto-examples-clique-net-clique-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the simple classification task"><div class="figure align-default" id="id15">
+<img alt="Main file simple" src="../_images/sphx_glr_GNN_simple_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_simple/GNN_simple.html#sphx-glr-auto-examples-tensorflow-simple-gnn-simple-py"><span class="std std-ref">Main file simple</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id16">
-<img alt="../_images/sphx_glr_gnn_utils_thumb3.png" src="../_images/sphx_glr_gnn_utils_thumb3.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="clique/gnn_utils.html#sphx-glr-auto-examples-clique-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
+<img alt="Utils" src="../_images/sphx_glr_gnn_utils_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_simple/gnn_utils.html#sphx-glr-auto-examples-tensorflow-simple-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style='clear:both'></div></div>
-<div class="section" id="mutag">
-<span id="sphx-glr-auto-examples-mutag"></span><h2>Mutag<a class="headerlink" href="#mutag" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id17">
-<img alt="../_images/sphx_glr_load_thumb4.png" src="../_images/sphx_glr_load_thumb4.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="mutag/load.html#sphx-glr-auto-examples-mutag-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="tensorflow-karate">
+<span id="sphx-glr-auto-examples-tensorflow-karate"></span><h2>Tensorflow Karate<a class="headerlink" href="#tensorflow-karate" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the karate classification task"><div class="figure align-default" id="id17">
+<img alt="Main file karate" src="../_images/sphx_glr_GNN_Karate_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_karate/GNN_Karate.html#sphx-glr-auto-examples-tensorflow-karate-gnn-karate-py"><span class="std std-ref">Main file karate</span></a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the mutag classification task"><div class="figure align-default" id="id18">
-<img alt="../_images/sphx_glr_GNN_Mutag_thumb.png" src="../_images/sphx_glr_GNN_Mutag_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="mutag/GNN_Mutag.html#sphx-glr-auto-examples-mutag-gnn-mutag-py"><span class="std std-ref">Main file mutag</span></a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id18">
+<img alt="Load script utilities" src="../_images/sphx_glr_load_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_karate/load.html#sphx-glr-auto-examples-tensorflow-karate-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the mutag problem: state and output transition function definition"><div class="figure align-default" id="id19">
-<img alt="../_images/sphx_glr_Net_Mutag_thumb.png" src="../_images/sphx_glr_Net_Mutag_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="mutag/Net_Mutag.html#sphx-glr-auto-examples-mutag-net-mutag-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the karate problem: state and output transition function definition"><div class="figure align-default" id="id19">
+<img alt="Net file" src="../_images/sphx_glr_Net_Karate_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_karate/Net_Karate.html#sphx-glr-auto-examples-tensorflow-karate-net-karate-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id20">
-<img alt="../_images/sphx_glr_gnn_utils_thumb4.png" src="../_images/sphx_glr_gnn_utils_thumb4.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="mutag/gnn_utils.html#sphx-glr-auto-examples-mutag-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<img alt="Utils" src="../_images/sphx_glr_gnn_utils_thumb1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_karate/gnn_utils.html#sphx-glr-auto-examples-tensorflow-karate-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div style='clear:both'></div><div class="sphx-glr-footer class sphx-glr-footer-gallery docutils container">
-<div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/f9f892b6c00b8e0a41d3c8a09b9c028f/auto_examples_python.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">auto_examples_python.zip</span></code></a></p>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="tensorflow-subgraph">
+<span id="sphx-glr-auto-examples-tensorflow-subgraph"></span><h2>Tensorflow Subgraph<a class="headerlink" href="#tensorflow-subgraph" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id21">
+<img alt="Load script utilities" src="../_images/sphx_glr_load_thumb2.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_subgraph/load.html#sphx-glr-auto-examples-tensorflow-subgraph-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
-<div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/6bcdb0cbb115ca5b3431e876f5271ffd/auto_examples_jupyter.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Jupyter</span> <span class="pre">notebooks:</span> <span class="pre">auto_examples_jupyter.zip</span></code></a></p>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the subgraph problem: state and output transition function definition"><div class="figure align-default" id="id22">
+<img alt="Net file" src="../_images/sphx_glr_Net_Subgraph_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_subgraph/Net_Subgraph.html#sphx-glr-auto-examples-tensorflow-subgraph-net-subgraph-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the subgraph classification task"><div class="figure align-default" id="id23">
+<img alt="Main file subgraph" src="../_images/sphx_glr_GNN_Subgraph_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_subgraph/GNN_Subgraph.html#sphx-glr-auto-examples-tensorflow-subgraph-gnn-subgraph-py"><span class="std std-ref">Main file subgraph</span></a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id24">
+<img alt="Utils" src="../_images/sphx_glr_gnn_utils_thumb2.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_subgraph/gnn_utils.html#sphx-glr-auto-examples-tensorflow-subgraph-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="tensorflow-clique">
+<span id="sphx-glr-auto-examples-tensorflow-clique"></span><h2>Tensorflow Clique<a class="headerlink" href="#tensorflow-clique" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id25">
+<img alt="Load script utilities" src="../_images/sphx_glr_load_thumb3.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_clique/load.html#sphx-glr-auto-examples-tensorflow-clique-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id25" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the clique classification task"><div class="figure align-default" id="id26">
+<img alt="Main file clique" src="../_images/sphx_glr_GNN_Clique_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_clique/GNN_Clique.html#sphx-glr-auto-examples-tensorflow-clique-gnn-clique-py"><span class="std std-ref">Main file clique</span></a></span><a class="headerlink" href="#id26" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the clique problem: state and output transition function definition"><div class="figure align-default" id="id27">
+<img alt="Net file" src="../_images/sphx_glr_Net_Clique_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_clique/Net_Clique.html#sphx-glr-auto-examples-tensorflow-clique-net-clique-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id27" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id28">
+<img alt="Utils" src="../_images/sphx_glr_gnn_utils_thumb3.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_clique/gnn_utils.html#sphx-glr-auto-examples-tensorflow-clique-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id28" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="tensorflow-mutag">
+<span id="sphx-glr-auto-examples-tensorflow-mutag"></span><h2>Tensorflow Mutag<a class="headerlink" href="#tensorflow-mutag" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="Load script for recovering python dictionaries from mat files"><div class="figure align-default" id="id29">
+<img alt="Load script utilities" src="../_images/sphx_glr_load_thumb4.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_mutag/load.html#sphx-glr-auto-examples-tensorflow-mutag-load-py"><span class="std std-ref">Load script utilities</span></a></span><a class="headerlink" href="#id29" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the main file for the mutag classification task"><div class="figure align-default" id="id30">
+<img alt="Main file mutag" src="../_images/sphx_glr_GNN_Mutag_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_mutag/GNN_Mutag.html#sphx-glr-auto-examples-tensorflow-mutag-gnn-mutag-py"><span class="std std-ref">Main file mutag</span></a></span><a class="headerlink" href="#id30" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This is the Net file for the mutag problem: state and output transition function definition"><div class="figure align-default" id="id31">
+<img alt="Net file" src="../_images/sphx_glr_Net_Mutag_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_mutag/Net_Mutag.html#sphx-glr-auto-examples-tensorflow-mutag-net-mutag-py"><span class="std std-ref">Net file</span></a></span><a class="headerlink" href="#id31" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Common utilities for data loading and preparation"><div class="figure align-default" id="id32">
+<img alt="Utils" src="../_images/sphx_glr_gnn_utils_thumb4.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="tensorflow_mutag/gnn_utils.html#sphx-glr-auto-examples-tensorflow-mutag-gnn-utils-py"><span class="std std-ref">Utils</span></a></span><a class="headerlink" href="#id32" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div><div class="sphx-glr-footer class sphx-glr-footer-gallery docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/07fcc19ba03226cd3d83d4e40ec44385/auto_examples_python.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">auto_examples_python.zip</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/6f1e7a639e0699d6164445b55e6c116d/auto_examples_jupyter.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Jupyter</span> <span class="pre">notebooks:</span> <span class="pre">auto_examples_jupyter.zip</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
@@ -363,32 +469,32 @@ The <a class="reference external" href="../tutorial.html">tutorial</a> introduce
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="simple/load.html" class="btn btn-neutral float-right" title="Load script utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../bibliography.html" class="btn btn-neutral float-left" title="Bibliography" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="PyTorch_Subgraph/main_subgraph.html" class="btn btn-neutral float-right" title="Main file Subgraph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../bibliography.html" class="btn btn-neutral float-left" title="Bibliography" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Matteo Tiezzi
+        &#169; Copyright 2020, Matteo Tiezzi.
       <span class="lastupdated">
-        Last updated on Aug 11, 2020.
+        Last updated on Feb 07, 2021.
       </span>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -396,7 +502,6 @@ The <a class="reference external" href="../tutorial.html">tutorial</a> introduce
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
