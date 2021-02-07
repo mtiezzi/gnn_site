@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Model Wrapper &mdash; gnn 1.2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="General Dataloder" href="dataloader.html" />
+    <link rel="prev" title="Utils" href="utils.html" /> 
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146116592-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-146116592-1');
+    </script>
+
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #e15e26" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> gnn
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../GNN/index.html">Graph Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install and import</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PyTorch.html">PyTorch Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tensorflow Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citing.html">Citing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#pytorch-subgraph">PyTorch Subgraph</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="main_subgraph.html">Main file Subgraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="net.html">Net file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pygnn.html">Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">Utils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Model Wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dataloader.html">General Dataloder</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#pytorch-karate">PyTorch Karate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tensorflow-simple">Tensorflow Simple</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tensorflow-karate">Tensorflow Karate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tensorflow-subgraph">Tensorflow Subgraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tensorflow-clique">Tensorflow Clique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tensorflow-mutag">Tensorflow Mutag</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gnn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples</a> &raquo;</li>
+        
+      <li>Model Wrapper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-pytorch-subgraph-gnn-wrapper-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="model-wrapper">
+<span id="sphx-glr-auto-examples-pytorch-subgraph-gnn-wrapper-py"></span><h1>Model Wrapper<a class="headerlink" href="#model-wrapper" title="Permalink to this headline">¶</a></h1>
+<p>This is the model wrapper file for the PyTorch implementation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">dataloader</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">Accuracy</span>
+<span class="kn">from</span> <span class="nn">torch.utils.tensorboard</span> <span class="kn">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">matplotlib_imshow</span>
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">from</span> <span class="nn">pygnn</span> <span class="kn">import</span> <span class="n">GNN</span>
+
+
+<span class="k">class</span> <span class="nc">GNNWrapper</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># hyperparams</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lrw</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loss_f</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence_threshold</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">label_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph_based</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_transition_hidden_dims</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_function_hidden_dims</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span> <span class="o">=</span> <span class="s2">&quot;semisupervised&quot;</span>
+
+            <span class="c1"># optional</span>
+            <span class="c1"># self.loss_w = 1.</span>
+            <span class="c1"># self.energy_weight = 0.</span>
+            <span class="c1"># self.l2_weight = 0.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="c1"># to be populated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="s1">&#39;logs/tensorboard&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_flag_writer</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dset</span><span class="p">,</span> <span class="n">state_net</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out_net</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># handle the dataset info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_loader</span><span class="p">(</span><span class="n">dset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span> <span class="o">=</span> <span class="n">GNN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">state_net</span><span class="p">,</span> <span class="n">out_net</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_criterion</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_accuracy</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_data_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dset</span><span class="p">):</span>  <span class="c1"># handle dataset data and metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dset</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">label_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">node_label_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">num_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">num_classes</span>
+
+    <span class="k">def</span> <span class="nf">_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># for name, param in self.gnn.named_parameters():</span>
+        <span class="c1">#     if param.requires_grad:</span>
+        <span class="c1">#         print(name, param.data)</span>
+        <span class="c1"># exit()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">lrw</span><span class="p">)</span>
+        <span class="c1">#self.optimizer = optim.SGD(self.gnn.parameters(), lr=self.config.lrw)</span>
+
+    <span class="k">def</span> <span class="nf">_criterion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">task_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">task_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">task_type</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="c1"># output computation</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+        <span class="c1"># loss computation - semisupervised</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># # updating accuracy</span>
+        <span class="c1"># batch_acc = self.TrainAccuracy.update((output, target), batch_compute=True)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>  <span class="c1"># Accuracy computation</span>
+            <span class="c1"># accuracy_train = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_train], dim=-1) == data.targets[data.idx_train]).float())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+            <span class="n">accuracy_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;Train Epoch: </span><span class="si">{}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> Mean Loss: </span><span class="si">{:.6f}</span><span class="se">\t</span><span class="s1">Accuracy Full Batch: </span><span class="si">{:.6f}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">  Best Accuracy : </span><span class="si">{:.6f}</span><span class="s1">  </span><span class="se">\t</span><span class="s1"> Iterations: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">epoch</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">(),</span> <span class="n">iterations</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">accuracy_train</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+
+                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_histogram</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+        <span class="c1"># self.TrainAccuracy.reset()</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">agg_matrix</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">agg_matrix</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="c1">####  TEST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+            <span class="n">acc_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+            <span class="c1"># acc_test = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_test], dim=-1) == data.targets[data.idx_test]).float())</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set: Average loss: </span><span class="si">{:.4f}</span><span class="s1">, Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%) , Best Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">test_loss</span><span class="p">,</span> <span class="n">acc_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">()))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">acc_test</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">test_loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valid_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="c1">####  TEST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">)</span>
+            <span class="n">acc_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+            <span class="c1"># acc_test = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_test], dim=-1) == data.targets[data.idx_test]).float())</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valid set: Average loss: </span><span class="si">{:.4f}</span><span class="s1">, Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%) , Best Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">test_loss</span><span class="p">,</span> <span class="n">acc_valid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">()))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">acc_valid</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">test_loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SemiSupGNNWrapper</span><span class="p">(</span><span class="n">GNNWrapper</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tensorboard</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># hyperparams</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lrw</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loss_f</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence_threshold</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">label_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph_based</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state_transition_hidden_dims</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_function_hidden_dims</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># optional</span>
+            <span class="c1"># self.loss_w = 1.</span>
+            <span class="c1"># self.energy_weight = 0.</span>
+            <span class="c1"># self.l2_weight = 0.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_data_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dset</span><span class="p">):</span>  <span class="c1"># handle dataset data and metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dset</span> <span class="o">=</span> <span class="n">dset</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">label_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">node_label_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">n_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">num_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span><span class="o">.</span><span class="n">num_classes</span>
+
+    <span class="k">def</span> <span class="nf">_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;semisupervised&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;semisupervised&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span> <span class="o">=</span> <span class="n">Accuracy</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;semisupervised&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="c1"># output computation</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+        <span class="c1"># loss computation - semisupervised</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_train</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_train</span><span class="p">])</span>
+
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="c1"># with torch.no_grad():</span>
+        <span class="c1">#     for name, param in self.gnn.named_parameters():</span>
+        <span class="c1">#         if &quot;state_transition_function&quot; in name:</span>
+        <span class="c1">#             #self.writer.add_histogram(&quot;gradient &quot; + name, param.grad, epoch)</span>
+        <span class="c1">#             param.grad = 0*  param.grad</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># # updating accuracy</span>
+        <span class="c1"># batch_acc = self.TrainAccuracy.update((output, target), batch_compute=True)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>  <span class="c1"># Accuracy computation</span>
+            <span class="c1"># accuracy_train = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_train], dim=-1) == data.targets[data.idx_train]).float())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">idx_train</span><span class="p">)</span>
+            <span class="n">accuracy_train</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;Train Epoch: </span><span class="si">{}</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> Mean Loss: </span><span class="si">{:.6f}</span><span class="se">\t</span><span class="s1">Accuracy Full Batch: </span><span class="si">{:.6f}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">  Best Accuracy : </span><span class="si">{:.6f}</span><span class="s1">  </span><span class="se">\t</span><span class="s1"> Iterations: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">epoch</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">accuracy_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TrainAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">(),</span> <span class="n">iterations</span><span class="p">))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">accuracy_train</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Training Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_histogram</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_histogram</span><span class="p">(</span><span class="s2">&quot;gradient &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+        <span class="c1"># self.TrainAccuracy.reset()</span>
+        <span class="k">return</span> <span class="n">output</span> <span class="c1"># used for plotting</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">agg_matrix</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">agg_matrix</span><span class="p">,</span> <span class="n">node_labels</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="c1">####  TEST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_test</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_test</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">idx_test</span><span class="p">)</span>
+            <span class="n">acc_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+            <span class="c1"># acc_test = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_test], dim=-1) == data.targets[data.idx_test]).float())</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set: Average loss: </span><span class="si">{:.4f}</span><span class="s1">, Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%) , Best Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">test_loss</span><span class="p">,</span> <span class="n">acc_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TestAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">()))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">acc_test</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">test_loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Test Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">valid_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="c1">####  TEST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gnn</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">edges</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">agg_matrix</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">node_labels</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_valid</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">idx_valid</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">targets</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">idx_valid</span><span class="p">)</span>
+            <span class="n">acc_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+            <span class="c1"># acc_test = torch.mean(</span>
+            <span class="c1">#     (torch.argmax(output[data.idx_test], dim=-1) == data.targets[data.idx_test]).float())</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">log_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valid set: Average loss: </span><span class="si">{:.4f}</span><span class="s1">, Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%) , Best Accuracy:  (</span><span class="si">{:.4f}</span><span class="s1">%)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">test_loss</span><span class="p">,</span> <span class="n">acc_valid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ValidAccuracy</span><span class="o">.</span><span class="n">get_best</span><span class="p">()))</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">tensorboard</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Accuracy&#39;</span><span class="p">,</span>
+                                           <span class="n">acc_valid</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Loss&#39;</span><span class="p">,</span>
+                                           <span class="n">test_loss</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;Valid Iterations&#39;</span><span class="p">,</span>
+                                           <span class="n">iterations</span><span class="p">,</span>
+                                           <span class="n">epoch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pytorch-subgraph-gnn-wrapper-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/582dfe24baeff7382a20d753079eecd3/gnn_wrapper.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">gnn_wrapper.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/a6c235d20432845627f9ad48b25f7e63/gnn_wrapper.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">gnn_wrapper.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dataloader.html" class="btn btn-neutral float-right" title="General Dataloder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Matteo Tiezzi.
+      <span class="lastupdated">
+        Last updated on Feb 07, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    
+
+  <style>
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #E15E26;
+    }
+    /* Sidebar */
+    .wy-nav-side {
+      background: #343131;
+    }
+  </style>
+
+
+</body>
+</html>
